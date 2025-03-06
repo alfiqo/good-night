@@ -4,6 +4,23 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/users/{id}/feeds":
+    get:
+      summary: Get all feeds
+      tags:
+      - Feeds
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: returns all feeds
+        '404':
+          description: user not found
   "/api/v1/users/{id}/followings":
     post:
       summary: Follow a user
@@ -113,8 +130,9 @@ paths:
                     nullable: true
                     example: 
                   duration_minutes:
-                    type: integer
-                    example: 
+                    type:
+                    - integer
+                    - 'null'
                   created_at:
                     type: string
                     format: date-time

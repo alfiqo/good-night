@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         member do
           resources :sleep_records, only: [ :create, :update ], param: :sleep_record_id
           resources :followings, only: [ :create, :destroy ], param: :following_id
+          resources :feeds, only: [ :index ]
         end
       end
     end
