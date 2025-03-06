@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [] do
         member do
-          resources :sleep_records, only: [ :create ]
+          resources :sleep_records, only: [ :create, :update ], param: :sleep_record_id
         end
       end
     end

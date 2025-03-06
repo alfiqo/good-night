@@ -11,9 +11,17 @@ require 'faker'
 
 # Clear existing users
 User.destroy_all
+SleepRecord.destroy_all
 
 100.times do
   User.create!(name: Faker::Name.name)
 end
 
 puts "✅ Seeded #{User.count} users!"
+
+100.times do
+  user = User.all.sample
+  SleepRecord.create!(slept_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now), user: user)
+end
+
+puts "✅ Seeded #{SleepRecord.count} sleep records!"
