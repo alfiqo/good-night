@@ -1,5 +1,4 @@
-Rails.application.routes.draw do
-  
+Rails.application.routes.draw do  
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
       resources :users, only: [] do
         member do
           resources :sleep_records, only: [ :create, :update ], param: :sleep_record_id
+          resources :followings, only: [ :create ]
         end
       end
     end

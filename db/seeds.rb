@@ -25,3 +25,10 @@ puts "✅ Seeded #{User.count} users!"
 end
 
 puts "✅ Seeded #{SleepRecord.count} sleep records!"
+
+100.times do
+  follower = User.all.sample
+  followed = User.where.not(id: follower.id).sample
+  Following.create!(followed: followed, follower: follower)
+end
+puts "✅ Seeded #{Following.count} followings!"

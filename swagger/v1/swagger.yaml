@@ -4,6 +4,57 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/users/{id}/followings":
+    post:
+      summary: Follow a user
+      tags:
+      - Followings
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: following created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 11111
+                  follower_id:
+                    type: integer
+                    example: 22222
+                  followed_id:
+                    type: integer
+                    example: 33333
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                required:
+                - id
+                - follower_id
+                - followed_id
+        '404':
+          description: user not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                followed_id:
+                  type: integer
+              required:
+              - followed_id
   "/api/v1/users/{id}/sleep_records":
     post:
       summary: Clock in a sleep record
