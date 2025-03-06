@@ -16,7 +16,7 @@ module Api::V1
                 following.destroy
                 head :no_content
             else
-                render json: { error: 'Following record not found' }, status: :not_found
+                render json: { error: "Following record not found" }, status: :not_found
             end
         end
 

@@ -3,7 +3,10 @@ module Api::V1
         before_action :is_user_exist?
 
         def index
-            feeds = @user.sleep_records_from_followed_users
+            cache_key = "user_#{@user.id}_feeds"
+            feeds = Rails.cache.fetch(cache_key, expires_in: 60.seconds) do
+                @user.sleep_records_from_followed_users.to_a
+            end
             render json: feeds
         end
 

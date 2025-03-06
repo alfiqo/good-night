@@ -13,22 +13,26 @@ require 'faker'
 User.destroy_all
 SleepRecord.destroy_all
 
-100.times do
+1000.times do
   User.create!(name: Faker::Name.name)
 end
 
 puts "✅ Seeded #{User.count} users!"
 
-100.times do
-  user = User.all.sample
-  SleepRecord.create!(slept_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now), user: user)
+users = User.all.sample(1000)
+users.each do |user|
+  slept_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+  woke_at = Faker::Time.between(from: slept_at, to: DateTime.now)
+  duration_minutes = ((woke_at - slept_at) / 60).to_i
+  SleepRecord.create!(slept_at: slept_at, woke_at: woke_at, duration_minutes: duration_minutes, user: user)
 end
 
 puts "✅ Seeded #{SleepRecord.count} sleep records!"
 
-100.times do
-  follower = User.all.sample
-  followed = User.where.not(id: follower.id).sample
+follower = User.all.sample
+followed_users = User.where.not(id: follower.id).sample(1000)
+
+followed_users.each do |followed|
   Following.create!(followed: followed, follower: follower)
 end
 puts "✅ Seeded #{Following.count} followings!"

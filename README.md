@@ -1,24 +1,103 @@
-# README
+# API Good Night
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Features
 
-Things you may want to cover:
+- **Sleep Records**
+  - Clock-in and clock-out functionality for tracking sleep sessions.
+  - View sleep records of users you follow.
 
-* Ruby version
+- **Social Interactions**
+  - Follow and unfollow other users.
 
-* System dependencies
+- **Health Check**
+  - A health check endpoint to verify API availability.
 
-* Configuration
+- **API Documentation**
+  - Swagger integration for interactive API documentation using `rswag`.
 
-* Database creation
+---
 
-* Database initialization
+## Requirements
 
-* How to run the test suite
+- Ruby 3.4.2
+- Rails 8.0.1
+- Sqlite
 
-* Services (job queues, cache servers, search engines, etc.)
+---
 
-* Deployment instructions
+## Setup Instructions
 
-* ...
+### Clone the Repository
+
+```bash
+git clone git@github.com:alfiqo/good-night.git
+cd good-night
+```
+
+### Install Dependencies
+
+```bash
+bundle install
+```
+
+### Set Up the Database
+
+```bash
+rails db:setup
+```
+This will create, migrate, and seed the database.
+
+### Run the Server
+
+```bash
+rails server
+```
+The application will be accessible at `http://localhost:3000`.
+
+### Health Check
+
+Visit `http://localhost:3000/up` to ensure the application is running.
+
+---
+
+## API Endpoints
+
+### Base URL
+
+```
+http://localhost:3000/api/v1
+```
+
+### API Documentation
+
+Swagger documentation is available at:
+```
+http://localhost:3000/api-docs
+```
+
+---
+
+## Testing
+
+### RSpec
+
+Run the test suite using:
+```bash
+bundle exec rspec
+```
+
+### RuboCop
+
+Lint the codebase using:
+```bash
+bundle exec rubocop
+```
+
+---
+
+## Seeding Data
+
+To populate the database with sample data, run:
+```bash
+rails db:seed
+```
