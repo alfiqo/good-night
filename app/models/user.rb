@@ -6,5 +6,7 @@ class User < ApplicationRecord
 
     def sleep_records_from_followed_users
         SleepRecord.where(user_id: followed_users.pluck(:id))
+        .last_7_days
+        .order_by_duration
     end
 end

@@ -24,4 +24,9 @@ class SleepRecord < ApplicationRecord
       errors.add(:slept_at, "can only have one record per day")
     end
   end
+
+  scope :last_7_days, -> {
+    where(slept_at: 7.days.ago.beginning_of_day..Time.current.end_of_day)
+  }
+  scope :order_by_duration, -> { order(duration_minutes: :desc) }
 end
