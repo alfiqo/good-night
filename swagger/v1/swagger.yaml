@@ -1,0 +1,57 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users/{id}/sleep_records":
+    post:
+      summary: Clock in a sleep record
+      tags:
+      - Sleep Records
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: sleep record created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 11111
+                  user_id:
+                    type: integer
+                    example: 22222
+                  slept_at:
+                    type: string
+                    format: date-time
+                  woke_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                    example: 
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                required:
+                - id
+                - user_id
+                - slept_at
+        '404':
+          description: user not found
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
