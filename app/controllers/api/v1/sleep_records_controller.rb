@@ -2,6 +2,7 @@ module Api::V1
     class SleepRecordsController < ApplicationController
         before_action :sleep_at_params, only: :create
         before_action :wake_at_params, only: :update
+        before_action :is_user_exist?, only: [ :create, :update ]
 
         def create
             user = User.find(params[:id])
@@ -10,7 +11,6 @@ module Api::V1
         end
 
         def update
-            # byebug
             sleep_record = SleepRecord.find(params[:sleep_record_id])
             sleep_record.update!(wake_at_params)
             render json: sleep_record, status: :ok
@@ -29,6 +29,12 @@ module Api::V1
             {
                 woke_at: Time.now
             }
+        end
+
+        def is_user_exist?
+            User.find(params[:id])
+        rescue ActiveRecord::RecordNotFound
+            render json: { error: 'User not found' }, status: :not_found
         end
     end
 end
