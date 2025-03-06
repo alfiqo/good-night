@@ -19,8 +19,7 @@ RSpec.describe 'api/v1/sleep_records', type: :request do
                  },
                  required: [ 'id', 'user_id', 'slept_at' ]
 
-        let(:id) { 11111 }
-        let(:user_id) { id }
+        let(:id) { User.create!(name: 'Test User').id }
         let(:slept_at) { Time.now }
         run_test!
       end
