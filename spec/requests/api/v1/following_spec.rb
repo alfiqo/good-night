@@ -1,9 +1,10 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/followings', type: :request do
-    let(:id) { User.create!(name: 'Test User').id }
-    let(:followed_id) { User.create!(name: 'Test User Followed').id }
-    let(:followings) { { followed_id: followed_id } }
+    let(:user) { User.create!(name: 'Test User') }
+    let(:id) { user.id }
+    let(:followed) { User.create!(name: 'Test User Followed') }
+    let(:followings) { { followed_id: followed.id } }
 
     path '/api/v1/users/{id}/followings' do
         post 'Follow a user' do
@@ -36,6 +37,30 @@ RSpec.describe 'api/v1/followings', type: :request do
 
             response '404', 'user not found' do
                 let(:id) { 'invalid' }
+                run_test!
+            end
+        end
+    end
+
+    path '/api/v1/users/{id}/followings/{following_id}' do
+        delete 'Unfollow a user' do
+            tags 'Followings'
+            produces 'application/json'
+            parameter name: :id, in: :path, type: :integer, description: 'User ID'
+            parameter name: :following_id, in: :path, type: :integer, description: 'Following ID'
+
+            response '204', 'following deleted' do
+                let(:following_id) { followed.id }
+
+                before do
+                    user.followings.create!(followed_id: followed.id)
+                end
+                run_test!
+            end
+
+            response '404', 'user or following not found' do
+                let(:id) { 'invalid' }
+                let(:following_id) { 'invalid' }
                 run_test!
             end
         end

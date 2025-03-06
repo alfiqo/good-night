@@ -55,6 +55,29 @@ paths:
                   type: integer
               required:
               - followed_id
+  "/api/v1/users/{id}/followings/{following_id}":
+    delete:
+      summary: Unfollow a user
+      tags:
+      - Followings
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      - name: following_id
+        in: path
+        description: Following ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: following deleted
+        '404':
+          description: user or following not found
   "/api/v1/users/{id}/sleep_records":
     post:
       summary: Clock in a sleep record
