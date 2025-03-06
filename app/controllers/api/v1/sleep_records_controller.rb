@@ -5,8 +5,7 @@ module Api::V1
         before_action :is_user_exist?, only: [ :create, :update ]
 
         def create
-            user = User.find(params[:id])
-            sleep_record = user.sleep_records.create!(sleep_at_params)
+            sleep_record = @user.sleep_records.create!(sleep_at_params)
             render json: sleep_record, status: :created
         end
 
@@ -32,7 +31,7 @@ module Api::V1
         end
 
         def is_user_exist?
-            User.find(params[:id])
+            @user = User.find(params[:id])
         rescue ActiveRecord::RecordNotFound
             render json: { error: "User not found" }, status: :not_found
         end

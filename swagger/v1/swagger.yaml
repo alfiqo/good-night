@@ -74,7 +74,7 @@ paths:
         schema:
           type: integer
       responses:
-        '200':
+        '204':
           description: following deleted
         '404':
           description: user or following not found
@@ -111,6 +111,9 @@ paths:
                     type: string
                     format: date-time
                     nullable: true
+                    example: 
+                  duration_minutes:
+                    type: integer
                     example: 
                   created_at:
                     type: string
@@ -163,6 +166,9 @@ paths:
                     type: string
                     format: date-time
                     nullable: true
+                  duration_minutes:
+                    type: integer
+                    example: 60
                   created_at:
                     type: string
                     format: date-time

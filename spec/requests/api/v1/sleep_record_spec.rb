@@ -14,6 +14,7 @@ RSpec.describe 'api/v1/sleep_records', type: :request do
                    user_id: { type: :integer, example: 22222 },
                    slept_at: { type: :string, format: 'date-time' },
                    woke_at: { type: :string, format: 'date-time', nullable: true, example: nil },
+                   duration_minutes: { type: %i[integer null] },
                    created_at: { type: :string, format: 'date-time' },
                    updated_at: { type: :string, format: 'date-time' }
                  },
@@ -45,6 +46,7 @@ RSpec.describe 'api/v1/sleep_records', type: :request do
                   user_id: { type: :integer, example: 22222 },
                   slept_at: { type: :string, format: 'date-time' },
                   woke_at: { type: :string, format: 'date-time', nullable: true },
+                  duration_minutes: { type: :integer, example: 60 },
                   created_at: { type: :string, format: 'date-time' },
                   updated_at: { type: :string, format: 'date-time' }
                },
