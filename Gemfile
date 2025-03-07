@@ -52,4 +52,5 @@ group :development, :test do
   gem "faker"
   gem "byebug"
   gem "rack-attack"
+  gem "kaminari"
 end

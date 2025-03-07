@@ -16,6 +16,16 @@ paths:
         required: true
         schema:
           type: integer
+      - name: page
+        in: query
+        description: Page number
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of feeds per page
+        schema:
+          type: integer
       responses:
         '200':
           description: returns all feeds
