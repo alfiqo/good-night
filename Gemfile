@@ -51,4 +51,5 @@ group :development, :test do
   gem "rswag-specs"
   gem "faker"
   gem "byebug"
+  gem "rack-attack"
 end
